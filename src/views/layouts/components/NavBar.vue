@@ -1,5 +1,9 @@
+<script setup>
+import DropDown from './NavBar/DropDown.vue';
+</script>
+
 <template>
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg border-bottom">
         <div class="container-fluid">
             <a class="navbar-brand" href="#" role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
                 aria-controls="offcanvasScrolling">Plataforma</a>
@@ -11,9 +15,14 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    
+                    <template v-for="(navbar_item, index) in this.navbar_items" :key="index">
+                        <template v-if="index === 'dropdown'">
+                            <DropDown title="Criar" :items="navbar_item" />
+                        </template>
+                    </template>
                 </ul>
             </div>
+
             <div class="d-flex">
                 <div class="form-check form-switch d-flex justify-content-between align-items-center">
                     <div>
@@ -34,14 +43,19 @@
 
 <script>
 export default {
+    props: ['navbar_items'],
     data() {
         return {
-            dark_mode: ''
+            dark_mode: false
         }
+    },
+    mounted() {
+        this.darkMode();
     },
     methods: {
         darkMode() {
-            document.querySelector('html').dataset.bsTheme = document.querySelector('html').dataset.bsTheme === 'light' ? 'dark' : 'light';
+            this.dark_mode = !this.dark_mode;
+            document.querySelector('html').dataset.bsTheme = this.dark_mode ? 'dark' : 'light';
         }
     }
 }

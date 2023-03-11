@@ -7,6 +7,11 @@ const router = createRouter({
             path: '/',
             name: 'home',
             component: () => import('../views/Home/Home.vue')
+        },
+        {
+            path: '/home/criar/ticket',
+            name: 'criarTicket',
+            component: () => import('../views/Home/views/CriarTicket/CriarTicket.vue')
         }
     ]
 })

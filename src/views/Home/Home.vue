@@ -6,7 +6,7 @@ import NavBar from '../layouts/components/NavBar.vue';
 
 <template>
     <Sidebar>
-        <NavBar />
+        <NavBar :navbar_items="navbar_items" />
         <Default>
             <div class="board mt-5">
                 <h1 class="text-center text-uppercase">Kanban</h1>
@@ -66,6 +66,19 @@ import NavBar from '../layouts/components/NavBar.vue';
 
 <script>
 export default {
+    data() {
+        return {
+            navbar_items: {
+                dropdown: [
+                    {
+                        type: 'text',
+                        label: 'Ticket',
+                        link: '/home/criar/ticket'
+                    }
+                ]
+            }
+        }
+    },
     methods: {
         dragStart(event) {
             console.log({
