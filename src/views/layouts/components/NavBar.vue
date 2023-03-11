@@ -15,27 +15,27 @@ import DropDown from './NavBar/DropDown.vue';
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item d-flex justify-content-between align-items-center mx-3">
+                        <div class="form-check form-switch d-flex justify-content-between align-items-center m-0 p-0">
+                            <div>
+                                <i class="bi bi-brightness-high" :class="{ 'd-none': !this.dark_mode }"></i>
+                                <i class="bi bi-brightness-high-fill" :class="{ 'd-none': this.dark_mode }"></i>
+                            </div>
+                            <input class="form-check-input mx-1" type="checkbox" role="switch" id="flexSwitchCheckDefault"
+                                v-model="dark_mode" :checked="dark_mode" @click="darkMode()">
+                            <div>
+                                <i class="bi bi-moon" :class="{ 'd-none': this.dark_mode }"></i>
+                                <i class="bi bi-moon-fill" :class="{ 'd-none': !this.dark_mode }"></i>
+                            </div>
+                        </div>
+                    </li>
+                    
                     <template v-for="(navbar_item, index) in this.navbar_items" :key="index">
                         <template v-if="index === 'dropdown'">
                             <DropDown title="Criar" :items="navbar_item" />
                         </template>
                     </template>
                 </ul>
-            </div>
-
-            <div class="d-flex">
-                <div class="form-check form-switch d-flex justify-content-between align-items-center">
-                    <div>
-                        <i class="bi bi-brightness-high" :class="{ 'd-none': !dark_mode }"></i>
-                        <i class="bi bi-brightness-high-fill" :class="{ 'd-none': dark_mode }"></i>
-                    </div>
-                    <input class="form-check-input mx-1" type="checkbox" role="switch" id="flexSwitchCheckDefault"
-                        v-model="dark_mode" @click="darkMode()">
-                    <div>
-                        <i class="bi bi-moon" :class="{ 'd-none': dark_mode }"></i>
-                        <i class="bi bi-moon-fill" :class="{ 'd-none': !dark_mode }"></i>
-                    </div>
-                </div>
             </div>
         </div>
     </nav>
@@ -46,16 +46,30 @@ export default {
     props: ['navbar_items'],
     data() {
         return {
-            dark_mode: false
+            dark_mode: true
         }
     },
     mounted() {
-        this.darkMode();
+        if (window.localStorage.getItem('mode') === null) {
+            window.localStorage.setItem('mode', 'dark');
+        }
+
+        this.dark_mode = window.localStorage.getItem('mode') === 'dark';
+        document.querySelector('html').dataset.bsTheme = window.localStorage.getItem('mode');
     },
     methods: {
         darkMode() {
-            this.dark_mode = !this.dark_mode;
-            document.querySelector('html').dataset.bsTheme = this.dark_mode ? 'dark' : 'light';
+            if (window.localStorage.getItem('mode') === null) {
+                window.localStorage.setItem('mode', 'dark');
+            } else {
+                if (window.localStorage.getItem('mode') === 'dark') {
+                    window.localStorage.setItem('mode', 'light');
+                } else {
+                    window.localStorage.setItem('mode', 'dark');
+                }
+            }
+
+            document.querySelector('html').dataset.bsTheme = window.localStorage.getItem('mode');
         }
     }
 }
