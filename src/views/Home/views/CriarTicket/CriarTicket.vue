@@ -2,8 +2,8 @@
 import Sidebar from '../../../layouts/components/Sidebar.vue';
 import Default from '../../../layouts/Default.vue';
 
-import FloatingField from '../../../CommonComponents/Form/Floating/FloatingField.vue';
-import FloatingSelect from '../../../CommonComponents/Form/Floating/FloatingSelect.vue';
+import FloatingField from '../../../Common/Form/Floating/FloatingField.vue';
+import FloatingSelect from '../../../Common/Form/Floating/FloatingSelect.vue';
 </script>
 
 <template>
@@ -12,8 +12,8 @@ import FloatingSelect from '../../../CommonComponents/Form/Floating/FloatingSele
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-3 pt-3 border overflow-auto">
-                        <FloatingField type="text" id="criarTicketTeste" placeholder="Tessteeee" div_class="mb-3" />
-                        <FloatingSelect id="criarTicketTeste" placeholder="Seleeect" div_class="mb-3" />
+                        <FloatingField type="text" name="criarTicketTeste" placeholder="Tessteeee" div_class="mb-3" />
+                        <FloatingSelect name="criarTicketTeste" placeholder="Seleeect" div_class="mb-3" />
                     </div>
                     <div class="col border">
                         123
