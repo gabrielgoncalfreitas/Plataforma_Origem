@@ -60,7 +60,7 @@ export default {
     methods: {
         darkMode() {
             if (window.localStorage.getItem('mode') === null) {
-                window.localStorage.setItem('mode', 'dark');
+                // window.localStorage.setItem('mode', 'dark');
             } else {
                 if (window.localStorage.getItem('mode') === 'dark') {
                     window.localStorage.setItem('mode', 'light');
