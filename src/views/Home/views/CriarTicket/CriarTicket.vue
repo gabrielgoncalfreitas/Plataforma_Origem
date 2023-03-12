@@ -12,11 +12,21 @@ import router from '../../../../router';
     <Sidebar>
         <Default :navbar_items="navbar_items">
             <div class="container-fluid">
+                <div class="backdrop" :class="{ 'd-none': !form_disabled }" id="loading">
+                    <div class="spinner-border" role="status"
+                        style="pointer-events: none; position: absolute; top: 50%; left: 50%;">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+
+
                 <form class="row justify-content-center" :action="router.resolve({ name: 'home' }).path" method="POST"
                     @submit="criar">
                     <div class="col-md-6 py-3 border">
-                        <FloatingText type="text" name="titulo" placeholder="Título" div_class="mb-3 p-0" />
-                        <FloatingTextarea type="text" name="texto" placeholder="Texto" div_class="mb-3 p-0" height="30vh" />
+                        <FloatingText type="text" name="titulo" placeholder="Título" div_class="mb-3 p-0"
+                            :disabled="form_disabled" required="true" />
+                        <FloatingTextarea type="text" name="texto" placeholder="Texto" div_class="mb-3 p-0"
+                            :disabled="form_disabled" required="true" height="30vh" />
 
                         <div class="row justify-content-center">
                             <div class="row col-md-6 m-0">
@@ -25,7 +35,7 @@ import router from '../../../../router';
                                 </RouterLink>
                             </div>
                             <div class="row col-md-6 m-0">
-                                <button class="btn btn-primary" type="submit">Criar</button>
+                                <button class="btn btn-primary" type="submit" :disabled="form_disabled">Criar</button>
                             </div>
                         </div>
                     </div>
@@ -41,16 +51,35 @@ const ticketsController = new TicketsController();
 
 export default {
     props: ['navbar_items'],
+    data() {
+        return {
+            form_disabled: false
+        }
+    },
     beforeMount() {
         document.title = 'Plataforma - Criar Ticket';
     },
     methods: {
         criar(event) {
             event.preventDefault();
+            this.form_disabled = true;
             ticketsController.criarTicket(event);
+            setTimeout(() => {
+                this.form_disabled = false;
+            }, 1000);
         }
     }
 }
 </script>
 
-<style></style>
+<style>
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+</style>
