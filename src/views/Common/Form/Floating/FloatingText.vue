@@ -1,6 +1,6 @@
 <template>
     <div class="form-floating" :class="div_class">
-        <input :type="type" class="form-control" :class="input_class" :id="name" :name="name" :placeholder="placeholder"
+        <input type="text" class="form-control" :class="input_class" :id="name" :name="name" :placeholder="placeholder"
             v-model="value" :disabled="disabled" :required="required">
         <label :for="name" :class="label_class">{{ placeholder }}</label>
     </div>
@@ -9,7 +9,6 @@
 <script>
 export default {
     props: [
-        'type',
         'name',
         'placeholder',
         'div_class',

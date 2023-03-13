@@ -1,6 +1,6 @@
 <template>
     <div class="form-floating" :class="div_class">
-        <textarea class="form-control" :class="input_class" :type="type" :id="name" :name="name" :placeholder="placeholder"
+        <textarea class="form-control" :class="input_class" :id="name" :name="name" :placeholder="placeholder"
             v-model="localValue" :disabled="disabled" :required="required" :style="{ 'height': height }"></textarea>
         <label :for="name" :class="label_class">{{ placeholder }}</label>
     </div>
@@ -9,7 +9,6 @@
 <script>
 export default {
     props: [
-        'type',
         'name',
         'placeholder',
         'div_class',
