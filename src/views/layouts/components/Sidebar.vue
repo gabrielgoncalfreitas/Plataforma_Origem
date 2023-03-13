@@ -1,3 +1,7 @@
+<script setup>
+import router from '../../../router';
+</script>
+
 <template>
     <div>
         <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
@@ -7,8 +11,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body" data-bs-dismiss="offcanvas" aria-label="Close">
-                <RouterLink to="/">
+                <RouterLink :to="router.resolve('/').path">
                     <h3>Home</h3>
+                </RouterLink>
+                <RouterLink :to="router.resolve('/sprints').path">
+                    <h3>Sprints</h3>
                 </RouterLink>
             </div>
         </div>
@@ -24,12 +31,7 @@ export default {
 </script>
 
 <style scoped>
-.offcanvas,
-.offcanvas-lg,
-.offcanvas-md,
-.offcanvas-sm,
-.offcanvas-xl,
-.offcanvas-xxl {
+.offcanvas {
     --bs-offcanvas-width: 30vh;
 }
 </style>
