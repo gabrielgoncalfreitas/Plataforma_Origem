@@ -39,13 +39,13 @@ try {
         fs.mkdirSync(dirSubView.concat('/assets'));
         fs.mkdirSync(dirSubView.concat('/components'));
         fs.mkdirSync(dirSubView.concat('/views'));
-        fs.readFile(path.join(process.cwd(), "\\_plataforma\\make\\subView\\_viewModel.vue"), function (err, data) {
+        fs.readFile(path.join(process.cwd(), "_plataforma", "make", "subView", "_viewModel.vue"), function (err, data) {
             if (err) {
                 console.error(err);
                 return;
             }
 
-            fs.writeFile(dirSubView.concat('\\'.concat(subView.concat('.vue'))), data, function (err) {
+            fs.writeFile(path.join(dirSubView, subView.concat('.vue')), data, function (err) {
                 if (err) {
                     console.error(err);
                     return;

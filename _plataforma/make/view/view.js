@@ -36,7 +36,7 @@ try {
                 return;
             }
 
-            fs.writeFile(dir.concat('\\'.concat(view.concat('.vue'))), data, function (err) {
+            fs.writeFile(path.join(dir, view.concat('.vue')), data, function (err) {
                 if (err) {
                     console.error(err);
                     return;
